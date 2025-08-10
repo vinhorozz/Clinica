@@ -22,7 +22,7 @@
 }
 
 body{
-  background-image: url("../image/clinicaMedica.webp");
+  background-image: url("../assets/clinicaMedica.webp");
   background-size: cover;
   background-color: var(--color-background-light);
   color: var(--color-text-dark);
