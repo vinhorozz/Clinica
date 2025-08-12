@@ -15,13 +15,13 @@ export class DomHandler{
         const listaConsulta=document.getElementById("listaConsultas");
         //criar o elemento que será filho do elemento acima
         const li=document.createElement("li");
-        li.className.add("consulta-item");
+        li.classList.add("consulta-item");
         li.textContent=mensagem;
 
         //Criar btn-Cancelar
         const btnCancelar=document.createElement("button");
         btnCancelar.textContent="Cancelar";
-        btnCancelar.className.add("btn-cancelar");
+        btnCancelar.classList.add("btn-cancelar");
         btnCancelar.style.backgroundColor="red";
         btnCancelar.style.borderRadius="5px";
 
