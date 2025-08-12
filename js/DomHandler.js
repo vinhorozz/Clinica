@@ -1,6 +1,5 @@
 export class DomHandler{
-
- static atualizarLista(lista,elemento,textoPadrao){
+    static atualizarLista(lista,elemento,textoPadrao){
         const selectList=document.getElementById(elemento);
         selectList.innerHTML=textoPadrao
             lista.forEach(item=>{
@@ -8,9 +7,33 @@ export class DomHandler{
                 option.value=item.nome;
                 option.textContent=item.nome;
                 selectList.appendChild(option)
-            });        
+                });        
    }
 
+   static exibirConsulta(mensagem){
+        //pegar o elemento da página
+        const listaConsulta=document.getElementById("listaConsultas");
+        //criar o elemento que será filho do elemento acima
+        const li=document.createElement("li");
+        li.className.add("consulta-item");
+        li.textContent=mensagem;
+
+        //Criar btn-Cancelar
+        const btnCancelar=document.createElement("button");
+        btnCancelar.textContent="Cancelar";
+        btnCancelar.className.add("btn-cancelar");
+        btnCancelar.style.backgroundColor="red";
+        btnCancelar.style.borderRadius="5px";
+
+        //adicionar event Remover a consulta ao botão
+        btnCancelar.addEventListener("click",()=>{
+            li.remove();
+        })
+        //adiciona o botão como filho do item da lista
+        li.appendChild(btnCancelar);
+        //adicionar o item como filho do elemento da página
+        listaConsulta.appendChild(li);
+   }
 }
 
 /*
@@ -18,16 +41,16 @@ export class DomHandler{
 
 Usar uma classe com métodos static em JavaScript é útil quando você quer agrupar funções relacionadas sem precisar criar instâncias dessa classe. Veja os principais motivos:
 
-Organização do código
+•Organização do código
 Métodos estáticos ajudam a organizar funções utilitárias sob um mesmo "nome" (a classe), facilitando a manutenção e leitura do código.
 
-Sem necessidade de instanciar
+•Sem necessidade de instanciar
 Você não precisa criar um objeto da classe para usar os métodos. Basta chamar, por exemplo, DomHandler.atualizarListaPaciente(pacientes).
 
-Não dependem de estado interno
+•Não dependem de estado interno
 Métodos estáticos geralmente não usam ou modificam propriedades da instância (this). Eles apenas recebem parâmetros e executam uma ação.
 
-Evita poluir o escopo global
+•Evita poluir o escopo global
 Em vez de criar várias funções soltas, você agrupa tudo em uma classe, evitando conflitos de nomes.
 
 Exemplo prático:
