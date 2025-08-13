@@ -23,6 +23,11 @@ async function loadData() {
         console.error("Erro ao carregar dados: ",error);
     }
 }
+ function formataData(data) {
+    const[ano,mes,dia]=data.split("-");
+    return `${dia}/${mes}/${ano}` 
+ }
+
 
 function agendarConsulta() {
     const pacienteSel=document.getElementById("selectPaciente").value;
@@ -38,7 +43,7 @@ function agendarConsulta() {
     const medico=medicos.find(m=>m.nome===medicoSel);
 
     if(paciente && medico){
-        medico.agendarConsulta(paciente,dataSel).then((mensagem)=>{
+        medico.agendarConsulta(paciente,formataData(dataSel)).then((mensagem)=>{
         DomHandler.exibirConsulta(mensagem);
         });    
     }
