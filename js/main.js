@@ -25,3 +25,14 @@ async function loadData() {
 }
 
 loadData();
+function agendarConsulta() {
+    const _paciente=document.getElementById("SelectPaciente").value
+    const _medico=document.getElementById("SelectMedico").value
+    const _data=document.getElementById("inputDate").value
+
+    if(!_data ||!_medico || !_paciente){
+        alert("Por favor, selecionar um paciente, um médico e uma data!")
+    }
+
+    
+}
