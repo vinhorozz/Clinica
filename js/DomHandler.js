@@ -25,7 +25,7 @@ export class DomHandler{
         btnCancelar.style.backgroundColor="red";
         btnCancelar.style.borderRadius="5px";
 
-        //adicionar event Remover a consulta ao botão
+        //adicionar evento Remover a consulta ao botão
         btnCancelar.addEventListener("click",()=>{
             li.remove();
         })

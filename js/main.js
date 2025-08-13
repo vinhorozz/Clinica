@@ -24,15 +24,28 @@ async function loadData() {
     }
 }
 
-loadData();
 function agendarConsulta() {
-    const _paciente=document.getElementById("SelectPaciente").value
-    const _medico=document.getElementById("SelectMedico").value
-    const _data=document.getElementById("inputDate").value
+    const pacienteSel=document.getElementById("selectPaciente").value;
+    const medicoSel=document.getElementById("selectMedico").value;
+    const dataSel=document.getElementById("inputDate").value;
 
-    if(!_data ||!_medico || !_paciente){
+    if(!dataSel ||!medicoSel || !pacienteSel){
         alert("Por favor, selecionar um paciente, um médico e uma data!")
     }
 
-    
+    //Validação de informações
+    const paciente=pacientes.find(p=>p.nome=== pacienteSel);
+    const medico=medicos.find(m=>m.nome===medicoSel);
+
+    if(paciente && medico){
+        medico.agendarConsulta(paciente,dataSel).then((mensagem)=>{
+        DomHandler.exibirConsulta(mensagem);
+        });    
+    }
 }
+
+document.addEventListener("DOMContentLoaded",()=>{
+    loadData();
+    document.getElementById("btnAgendar").addEventListener("click",agendarConsulta)
+})
+
