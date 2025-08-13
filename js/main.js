@@ -5,7 +5,8 @@ import Paciente from "./Paciente.js";
 let medicos=[];
 let pacientes=[];
 
-async function loadData() {
+//buscar informações em bancos de dados
+async function carregarDados() {
     try{
         const responseDoc=await fetch("./data/doctors.json");
         const responsePatient=await fetch("./data/patients.json");        
@@ -23,34 +24,34 @@ async function loadData() {
         console.error("Erro ao carregar dados: ",error);
     }
 }
+
  function formataData(data) {
     const[ano,mes,dia]=data.split("-");
     return `${dia}/${mes}/${ano}` 
  }
 
-
 function agendarConsulta() {
-    const pacienteSel=document.getElementById("selectPaciente").value;
-    const medicoSel=document.getElementById("selectMedico").value;
-    const dataSel=document.getElementById("inputDate").value;
+    const $paciente=document.getElementById("selectPaciente").value;
+    const $medico=document.getElementById("selectMedico").value;
+    const $data=document.getElementById("inputDate").value;
 
-    if(!dataSel ||!medicoSel || !pacienteSel){
+    if(!$data ||!$medico || !$paciente){
         alert("Por favor, selecionar um paciente, um médico e uma data!")
     }
 
     //Validação de informações
-    const paciente=pacientes.find(p=>p.nome=== pacienteSel);
-    const medico=medicos.find(m=>m.nome===medicoSel);
+    const paciente=pacientes.find(p=>p.nome=== $paciente);
+    const medico=medicos.find(m=>m.nome===$medico);
 
     if(paciente && medico){
-        medico.agendarConsulta(paciente,formataData(dataSel)).then((mensagem)=>{
+        medico.agendarConsulta(paciente,formataData($data)).then((mensagem)=>{
         DomHandler.exibirConsulta(mensagem);
         });    
     }
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
-    loadData();
+    carregarDados();
     document.getElementById("btnAgendar").addEventListener("click",agendarConsulta)
 })
 
