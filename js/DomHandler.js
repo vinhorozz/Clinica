@@ -13,6 +13,14 @@ export class DomHandler{
    static exibirConsulta(mensagem){
         //pegar o elemento da página
         const listaConsulta=document.getElementById("listaConsultas");
+        //Evitar repetição de valores na lista
+        const valoresExistentes=Array.from(listaConsulta.getElementsByTagName("li"));
+        const encontrado=valoresExistentes.some(li=> li.textContent.includes(mensagem));
+        if (encontrado){
+            alert ("Essa consulta já foi agendada")
+            return
+        }
+
         //criar o elemento que será filho do elemento acima
         const li=document.createElement("li");
         li.classList.add("consulta-item");
@@ -26,9 +34,7 @@ export class DomHandler{
         btnCancelar.style.borderRadius="5px";
 
         //adicionar evento Remover a consulta ao botão
-        btnCancelar.addEventListener("click",()=>{
-            li.remove();
-        })
+        btnCancelar.addEventListener("click",()=>{li.remove();})
         //adiciona o botão como filho do item da lista
         li.appendChild(btnCancelar);
         //adicionar o item como filho do elemento da página
